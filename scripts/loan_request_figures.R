@@ -31,9 +31,11 @@ samples.locals <- all_samples[,.(MUSEUM,GUID,DEC_LAT,DEC_LONG)]
 file_list <- list.files(path="/Users/ericarobertson/Desktop/BCRF/BCRF-Historical/mapping_data/USGS_TIFF/", pattern="*.tif", all.files=TRUE, full.names=TRUE)
 test_raster <- raster("/Users/ericarobertson/Desktop/BCRF/BCRF-Historical/mapping_data/USGS_TIFF/USGS_13_n36w105_20220801.tif")
 allrasters <- lapply(file_list, rast)
+allrasters <- aggregate(allrasters, 10)
+
 
 #merging the files together into a single elevation raster for Colorado
-merged <- do.call(merge, allrasters)
+merged <- do.call(aggregate(mean), allrasters)
 writeRaster(merged, "/Users/ericarobertson/Desktop/BCRF/BCRF-Historical/mapping_data/raw_BCRF_working_area_elev.tif")
 merged.ag <- aggregate(merged, 10)
 
