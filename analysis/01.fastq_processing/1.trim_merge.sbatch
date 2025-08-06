@@ -27,11 +27,6 @@ conda activate bioinf
 
 sample=$1
 
-#FASTP
-#fastp -i "$sample".R1.fq.gz -I "$sample".R2.fq.gz -o "$sample".R1.trim.fq.gz -O "$sample".R2.trim.fq.gz
-
-#SEQPREP2
-
 mkdir ../trim_merged
 mkdir ../logs/seqprep2_trim_merge
 
@@ -44,7 +39,7 @@ adapter_b="AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT"
 minlen="28"
 overlap="19"
 
-/projects/ericacnr@colostate.edu/SeqPrep2/SeqPrep2 \
+SeqPrep2 \
   -f "$sample".R1.fq.gz -r "$sample".R2.fq.gz \
   -1 /dev/null -2 /dev/null -s "$merged"
  \
